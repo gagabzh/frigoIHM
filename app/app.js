@@ -11,4 +11,17 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
     $locationProvider.hashPrefix('!');
 
     $routeProvider.otherwise({redirectTo: '/view1'});
-}]);
+}])
+    .factory('serviceAjax', function serviceAjax($http) {
+
+    return{
+        postRecette: function(data) {
+            data.ingredient=[{"id":1}];
+            console.log(data);
+            return $http.post("http://localhost:8080/recipes",data);
+        },
+        popular: function() {
+            return $http.get("http://localhost:8080/recipes");
+        }
+    };
+});

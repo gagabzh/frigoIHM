@@ -2,6 +2,9 @@
     <div ng-repeat="recette in recipe">
         <h2>{{recette.name}}</h2>
         {{recette.description}}
+        <div ng-repeat = "ingre in recette.ingredient">
+            {{ingre.product.name}}
+        </div>
     </div>
 </div>
 

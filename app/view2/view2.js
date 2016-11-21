@@ -9,6 +9,11 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-.controller('View2Ctrl', [function() {
+    .controller('View2Ctrl', ['$scope','serviceAjax', function($scope,serviceAjax) {
+        $scope.create = false;
+        $scope.update = function(data){
+            serviceAjax.postRecette(data)
+        };
+        $scope.reset = function(){}
 
 }]);
