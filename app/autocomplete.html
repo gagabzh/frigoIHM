@@ -1,0 +1,9 @@
+<input type="text" ng-change="changment()" ng-model="search">
+<div style="background-color: blue">
+    <div ng-repeat="prod in filterProducts" ng-click="remplir(prod)">
+        {{prod}}
+    </div>
+    <div ng-if="search" ng-click="showModalProduct()">
+        Ajouter un produit
+    </div>
+</div>

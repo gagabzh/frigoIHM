@@ -3,5 +3,12 @@
         <label>Nom: <input type="text" ng-model="recipe.name" /></label><br />
         <label>Description: <input type="text" ng-model="recipe.description" /></label><br />
         <label>Nombre de personne: <input type="number" ng-model="recipe.personNumber" /></label><br />
+        Ingrédients :
+        <div flex>
+            <label>Ingrédients 1 :
+            <ng-autocomplete></ng-autocomplete>
+            </label>
+
+        </div>
         <input type="submit" ng-click="update(recipe)" value="Save" />
     </form>

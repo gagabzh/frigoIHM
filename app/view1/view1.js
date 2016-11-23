@@ -10,7 +10,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
 .controller('View1Ctrl', ['$scope','serviceAjax', function($scope,serviceAjax) {
     var loadMovies = function(){
-        serviceAjax.popular().success(function(data) {
+        serviceAjax.recette().success(function(data) {
             $scope.recipe = data;
         });
     };
