@@ -1,0 +1,39 @@
+<div>
+    <form>
+        <label>Saison :
+            <select ng-model="data.typeSeason"  >
+                <option ng-repeat="option in availableSaison" value="{{option.name}}">{{option.name}}</option>
+            </select>
+        </label>
+        <label> Produits
+            <div ng-repeat="nb in nbIngredient">
+                <label>Produits {{nb.id}} :
+                    <ng-autocomplete my-two-way-bind="nb" can-add="false"></ng-autocomplete>
+                </label>
+            </div>
+            <button ng-click="addIngredient()">Add produit</button>
+        </label>
+        <label>Nombre de personne: <input type="number" ng-model="data.personNumber" /></label><br />
+    <input type="submit" ng-click="filtreRecipe()" value="Save" />
+</form>
+<br />
+    <label>Type de plat :
+        <select ng-model="typeFiltre" ng-change="changement()" >
+            <option ng-repeat="option in availableTypes" value="{{option.name}}">{{option.name}}</option>
+        </select>
+    </label>
+
+    {{typeFiltre.name}}
+    <br />
+    <div ng-repeat="recette in filterRecipe">
+        <h2>{{recette.name}} ({{recette.typePlat.name}})</h2>
+        {{recette.description}}
+        <div ng-repeat = "ingre in recette.ingredient">
+            - {{ingre.quantity.value}} {{ingre.quantity.unit.name}} de {{ingre.product.name}}
+        </div>
+        <div>
+            {{recette.instruction}}
+        </div>
+    </div>
+
+</div>

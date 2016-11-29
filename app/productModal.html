@@ -1,0 +1,41 @@
+<div>
+    <form>
+        <label>Product: <input type="text" ng-model="product.name" /></label><br />
+        <label>Descirption: <textarea name="Text1" ng-model="product.description" cols="40" rows="5"></textarea></label><br />
+        <label>Cout :
+            <select ng-model="product.cost"  >
+                <option ng-repeat="option in availableCost" value="{{option.name}}">{{option.name}}</option>
+            </select>
+        </label>
+        <br />
+        <label>Catégorie :
+            <select ng-model="product.mainCategory"  >
+                <option ng-repeat="option in availableCategory" value="{{option}}">{{option}}</option>
+            </select>
+        </label>
+        <label>Limite de consomation :
+            <input type="number" ng-model="product.averageLimitConsumptionDuration" /></label>
+            <select ng-model="product.averageLimitConsumptionUnit"  >
+                <option ng-repeat="option in availableDuration" value="{{option.name}}">{{option.name}}</option>
+            </select>
+        </label>
+        <br />
+        <label>Quantité indivisible:
+            <input type="number" ng-model="product.indivisibleQuantity.value" /></label>
+        <select ng-model="product.indivisibleQuantity.unit"  >
+            <option ng-repeat="option in availableUnits" value="{{option.name}}">{{option.name}}</option>
+        </select>
+        </label>
+        <br />
+        <label>Calories: <input type="number" ng-model="product.calory" /></label><br />
+        <label>Date de début de saison: <input type="date" ng-model="product.beginSeasonDate" /></label>
+        <label>Date de fin de saison: <input type="date" ng-model="product.endSeasonDate" /></label><br />
+        <br/>
+        <input type="submit" ng-click="save()" value="Save" />
+        <input type="submit" ng-click="close()" value="Cancel" />
+        <br/>
+    </form>
+    <div ng-if="error">
+        Impossible de sauvegarder, vérifier les informations saisies
+    </div>
+</div>

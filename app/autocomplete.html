@@ -1,9 +1,9 @@
-<input type="text" ng-change="changment()" ng-model="search">
-<div style="background-color: blue">
-    <div ng-repeat="prod in filterProducts" ng-click="remplir(prod)">
-        {{prod}}
+<input type="text" ng-change="changement()" ng-model="search">
+    <div ng-show="show" >
+        <div ng-repeat="prod in filterProducts" ng-click="remplir(prod)">
+            {{prod}}
+        </div>
+        <div ng-if="canAdd" ng-click="showModalProduct()">
+            Ajouter un produit
+        </div>
     </div>
-    <div ng-if="search" ng-click="showModalProduct()">
-        Ajouter un produit
-    </div>
-</div>
