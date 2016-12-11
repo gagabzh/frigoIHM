@@ -1,0 +1,48 @@
+<div>
+    <div>
+        <h2>
+            {{item.id}} - {{item.product.name}}
+        </h2>
+        <h3>
+            {{item.product.mainCategory.name}}
+        </h3>
+            <div>
+                {{item.product.description}}
+            </div>
+        <h3> Etat du stock : </h3>
+        <ul>
+            <li>
+                Dans le stock : {{item.ownQuantity.value}} {{label.unitesLabel[item.ownQuantity.unit.name]}}
+            </li>
+            <li>
+                Minimum à avoir : {{item.minimalQuantity.value}} {{label.unitesLabel[item.minimalQuantity.unit.name]}}
+            </li>
+        </ul>
+        <h3> Information produit</h3>
+            <ul>
+                <li>
+                    DLC : {{item.limitConsumptionDate}}
+                </li>
+                <li>
+                    Saison : de {{label.mounthLabel[item.product.beginSeasonDate]}} à {{label.mounthLabel[item.product.endSeasonDate]}}
+                </li>
+                <li>
+                    A consomé en {{item.product.averageLimitConsumptionDuration}}
+                    {{label.durationLabel[item.product.averageLimitConsumptionUnit.name]}}
+                </li>
+                <li>
+                    cout : {{label.costLabel[item.product.cost.name]}}
+                </li>
+                <li>
+                    calories : {{item.product.calory}}
+                </li>
+            </ul>
+        <h3> Recettes associées</h3>
+            <ul>
+                <li ng-repeat="recette in recipe">
+                    {{recette.name}}
+                </li>
+            </ul>
+    </div>
+    <input type="submit" ng-click="" value="modify" />
+</div>

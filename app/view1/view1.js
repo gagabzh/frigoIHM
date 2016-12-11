@@ -8,9 +8,11 @@ angular.module('myApp.view1', ['ngRoute'])
         });
     }])
 
-    .controller('View1Ctrl', ['$scope','serviceAjax', function($scope,serviceAjax) {
+    .controller('View1Ctrl', ['$scope','serviceAjax','labels', function($scope,serviceAjax,labels) {
         $scope.recipe = {};
+        $scope.label = labels;
         serviceAjax.recette().success(function(data) {
             $scope.recipe = data;
         });
+
     }]);

@@ -1,13 +1,16 @@
 <div>
+
     <div ng-repeat="recette in recipe">
-        <h2>{{recette.name}} ({{recette.typePlat.name}})</h2>
+        <h2>
+            {{recette.id}} -
+            <a ng-href="#!/recipe/{{recette.id}}">{{recette.name}}</a>
+            ({{label.platsLabel[recette.typePlat.name]}})
+        </h2>
         {{recette.description}}
         <div ng-repeat = "ingre in recette.ingredient">
-            - {{ingre.quantity.value}} {{ingre.quantity.unit.name}} de {{ingre.product.name}}
-        </div>
-        <div>
-            <pre>{{recette.instruction}}</pre>
+            - {{ingre.quantity.value}} {{label.unitesLabel[ingre.quantity.unit.name]}} de {{ingre.product.name}}
         </div>
     </div>
+
 </div>
 

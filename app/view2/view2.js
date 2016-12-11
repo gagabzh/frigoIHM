@@ -9,7 +9,8 @@ angular.module('myApp.view2', ['ngRoute'])
   });
 }])
 
-    .controller('View2Ctrl', ['$scope','serviceAjax', function($scope,serviceAjax) {
+    .controller('View2Ctrl', ['$scope','serviceAjax','labels', function($scope,serviceAjax,labels) {
+        $scope.label = labels;
         $scope.response = false;
         serviceAjax.unitDispo().success(function(data) {
             $scope.availableUnits = data;

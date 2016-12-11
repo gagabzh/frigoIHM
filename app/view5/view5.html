@@ -1,0 +1,19 @@
+
+<div>
+    <div>
+        <h2>
+            {{recette.id}} - {{recette.name}}
+            ({{label.platsLabel[recette.typePlat.name]}})
+        </h2>
+        {{recette.description}}
+        <div ng-repeat = "ingre in recette.ingredient">
+            - {{ingre.quantity.value}} {{label.unitesLabel[ingre.quantity.unit.name]}} de {{ingre.product.name}}
+        </div>
+        <div>
+            <pre>{{recette.instruction}}</pre>
+        </div>
+    </div>
+    <button ng-click="showModalModify()"> modifier </button>
+    <button ng-click="showModalCook()"> cuisiner </button>
+    <button ng-click="showModalPlan()"> prévoir </button>
+</div>

@@ -1,0 +1,24 @@
+<div>
+    <ul>
+        <li ng-repeat="container in stock">
+            {{container.name}} :
+            <ul>
+                <li ng-repeat="cat in category">
+                    {{cat}}
+                    <ul>
+                        <li ng-repeat="item in container.stockItem" ng-if="cat == item.product.mainCategory.name">
+                                {{item.ownQuantity.value}} {{label.unitesLabel[item.ownQuantity.unit.name]}} de
+                            <a ng-href="#!/stock/{{item.product.id}}">{{item.product.name}}</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <li ng-repeat="item in container.leftover">
+                    Reste de {{item.recipe.name}} pour {{item.quantity}} personne
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</div>

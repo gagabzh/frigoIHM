@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('myApp.productModal', [])
-    .controller('productModalCtrl', ['$scope','serviceAjax','items','$filter', function ($scope,serviceAjax,items,$filter) {
+    .controller('productModalCtrl', ['$scope','serviceAjax','items','$filter','labels',
+        function ($scope,serviceAjax,items,$filter,labels) {
+        $scope.label = labels;
         $scope.availableCost={};
         $scope.availableCategory={};
         $scope.availableDuration={};

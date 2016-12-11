@@ -2,7 +2,7 @@
     <form>
         <label>Saison :
             <select ng-model="data.typeSeason"  >
-                <option ng-repeat="option in availableSaison" value="{{option.name}}">{{option.name}}</option>
+                <option ng-repeat="option in availableSaison" value="{{option.name}}">{{label.seasonLabel[option.name]}}</option>
             </select>
         </label>
         <label> Produits
@@ -19,20 +19,20 @@
 <br />
     <label>Type de plat :
         <select ng-model="typeFiltre" ng-change="changement()" >
-            <option ng-repeat="option in availableTypes" value="{{option.name}}">{{option.name}}</option>
+            <option ng-repeat="option in availableTypes" value="{{option.name}}">{{label.platsLabel[option.name]}}</option>
         </select>
     </label>
 
     {{typeFiltre.name}}
     <br />
-    <div ng-repeat="recette in filterRecipe">
-        <h2>{{recette.name}} ({{recette.typePlat.name}})</h2>
+    <div ng-repeat="recette in filterRecipe ">
+        <h2>
+            <a ng-href="#!/recipe/{{recette.id}}">{{recette.name}}</a>
+            ({{label.platsLabel[recette.typePlat.name]}})
+        </h2>
         {{recette.description}}
         <div ng-repeat = "ingre in recette.ingredient">
-            - {{ingre.quantity.value}} {{ingre.quantity.unit.name}} de {{ingre.product.name}}
-        </div>
-        <div>
-            {{recette.instruction}}
+            - {{ingre.quantity.value}} {{label.unitesLabel[ingre.quantity.unit.name]}} de {{ingre.product.name}}
         </div>
     </div>
 

@@ -4,7 +4,7 @@
         <label>Descirption: <textarea name="Text1" ng-model="product.description" cols="40" rows="5"></textarea></label><br />
         <label>Cout :
             <select ng-model="product.cost"  >
-                <option ng-repeat="option in availableCost" value="{{option.name}}">{{option.name}}</option>
+                <option ng-repeat="option in availableCost" value="{{option.name}}">{{label.costLabel[option.name]}}</option>
             </select>
         </label>
         <br />
@@ -16,20 +16,20 @@
         <label>Limite de consomation :
             <input type="number" ng-model="product.averageLimitConsumptionDuration" /></label>
             <select ng-model="product.averageLimitConsumptionUnit"  >
-                <option ng-repeat="option in availableDuration" value="{{option.name}}">{{option.name}}</option>
+                <option ng-repeat="option in availableDuration" value="{{option.name}}">{{label.durationLabel[option.name]}}</option>
             </select>
         </label>
         <br />
         <label>Quantité indivisible:
             <input type="number" ng-model="product.indivisibleQuantity.value" /></label>
         <select ng-model="product.indivisibleQuantity.unit"  >
-            <option ng-repeat="option in availableUnits" value="{{option.name}}">{{option.name}}</option>
+            <option ng-repeat="option in availableUnits" value="{{option.name}}">{{label.unitesLabel[option.name]}}</option>
         </select>
         </label>
         <br />
         <label>Calories: <input type="number" ng-model="product.calory" /></label><br />
-        <label>Date de début de saison: <input type="date" ng-model="product.beginSeasonDate" /></label>
-        <label>Date de fin de saison: <input type="date" ng-model="product.endSeasonDate" /></label><br />
+        <label>Date de début de saison: <input type="number" ng-model="product.beginSeasonDate" /></label>
+        <label>Date de fin de saison: <input type="number" ng-model="product.endSeasonDate" /></label><br />
         <br/>
         <input type="submit" ng-click="save()" value="Save" />
         <input type="submit" ng-click="close()" value="Cancel" />

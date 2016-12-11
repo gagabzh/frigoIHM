@@ -1,0 +1,13 @@
+
+    <form>
+        <label>Date: <input type="date" ng-model="menu.previsionalDate" ng-change="getMenu()"/></label><br />
+        <label>Type de plat :
+            <select ng-options="label.platsLabel[option.name] for option in availableTypes track by option.name"
+                    ng-model="menu.typePlat"></select>
+
+        </label><br />
+        <br/>
+        <input type="submit" ng-click="save()" value="Save" />
+        <input type="submit" ng-click="close()" value="Cancel" />
+        <br/>
+    </form>

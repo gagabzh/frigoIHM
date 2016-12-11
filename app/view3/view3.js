@@ -9,7 +9,8 @@ angular.module('myApp.view3', ['ngRoute'])
         });
     }])
 
-    .controller('View3Ctrl', ['$scope','serviceAjax', function($scope,serviceAjax) {
+    .controller('View3Ctrl', ['$scope','serviceAjax','labels', function($scope,serviceAjax,labels) {
+        $scope.label = labels;
         $scope.create = false;
         $scope.availableTypes ={};
         $scope.recipe = {};
@@ -33,6 +34,7 @@ angular.module('myApp.view3', ['ngRoute'])
         // });
 
         $scope.filtreRecipe = function(){
+            $scope.data={};
             $scope.data.products = $scope.nbIngredient;
             console.log($scope.data);
             serviceAjax.findRecette($scope.data).success(function(retour) {
@@ -40,8 +42,10 @@ angular.module('myApp.view3', ['ngRoute'])
                 $scope.filterRecipe= retour;
                 $scope.data = {};
                 $scope.nbIngredient = [{id:1, product:''}];
+
             });
         };
+
         $scope.changement = function(){
             $scope.filterRecipe= {};
             if ($scope.typeFiltre==='ALL'){

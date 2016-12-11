@@ -1,0 +1,41 @@
+<form>
+    <h2> Modification de la recette de {{recipe.name}}</h2>
+    <label>Nom: <input type="text" ng-model="recipe.name" /></label><br />
+    <label>Description: <textarea cols="40" rows="2" ng-model="recipe.description"></textarea></label><br />
+    <label>Nombre de personne: <input type="number" ng-model="recipe.personNumber" /></label><br />
+    <label>Type de plat :
+      <select ng-options="label.platsLabel[option.name] for option in availableTypes track by option.name"
+                ng-model="recipe.typePlat"></select>
+
+    </label><br />
+    Ingrédients :
+    <div flex>
+
+        <div ng-repeat="nb in nbIngredient">
+            <label>Ingrédients :
+                <input type="number" ng-model="nb.quantity.value">
+                <select ng-options="label.unitesLabel[option.name] for option in availableUnits track by option.name"
+                        ng-model="nb.quantity.unit"></select>
+                {{nb.product.name}}
+                <button ng-click="remove()">-</button>
+            </label>
+        </div>
+        <div ng-repeat="nb in newIngredient">
+            <label>Ingrédients {{nb.id}} :
+                <input type="number" ng-model="nb.quantity.value">
+                <select ng-model="nb.quantity.unit">
+                    <option ng-repeat="option in availableUnits" value="{{option.name}}">{{label.unitesLabel[option.name]}}</option>
+                </select>
+                <ng-autocomplete my-two-way-bind="nb" can-add="true"></ng-autocomplete>
+            </label>
+        </div>
+        <button ng-click="addIngredient()">Add Ingredient</button>
+
+
+    </div>
+    <label>Instruction: <textarea name="Text1" ng-model="recipe.instruction" cols="40" rows="5"></textarea></label><br />
+    <br/>
+    <input type="submit" ng-click="save()" value="Save" />
+    <input type="submit" ng-click="close()" value="Cancel" />
+    <br/>
+</form>
