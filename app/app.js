@@ -136,7 +136,7 @@ directive('ngAutocomplete', function() {
     return{
         transclude: true,
         restrict: "EA",
-        templateUrl: "./autocomplete.html",
+        templateUrl: "directives/autocomplete.html",
         scope: {
             twoWayBind: "=myTwoWayBind",
             canAdd: "=canAdd",
@@ -164,7 +164,7 @@ directive('ngAutocomplete', function() {
                 $scope.show = false;
                 $uibModal.open({
                     animation: true,
-                    templateUrl: 'productModal.html',
+                    templateUrl: 'modals/productModal.html',
                     controller: 'productModalCtrl',
                     resolve: {
                         items: function () {
