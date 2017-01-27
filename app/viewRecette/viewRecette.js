@@ -3,24 +3,48 @@
  */
 'use strict';
 
-angular.module('myApp.view5', [
-    'ngRoute',
-
+angular.module('myApp.viewRecette', [
+    'ngRoute'
 ])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/recipe/:id', {
-            templateUrl: 'view5/view5.html',
+            templateUrl: 'viewRecette/viewRecette.html',
             controller: 'View5Ctrl'
         });
     }])
+    .directive('viewRecipe', function() {
+    return {
+        restrict: "EA",
+        templateUrl: 'viewRecette/viewRecette.html',
+        scope: {
+            twoWayBind: "=myTwoWayBind",
+            recipeToShow: "=recipeToShow"
+        },
+        controller: ['$scope','serviceAjax','labels',
+                function($scope,serviceAjax,labels) {
+                    console.log($scope.recipeToShow);
+                    $scope.label = labels;
+                    if ($scope.recipeToShow !== undefined) {
+                        serviceAjax.detailRecette($scope.recipeToShow).then(function (response) {
+                            $scope.recette = response.data;
+                        });
+                    }else{
+                        serviceAjax.detailRecette(1).then(function (response) {
+                            $scope.recette = response.data;
+                        });
+                    }
+                }
+        ]
 
+    }
+    })
     .controller('View5Ctrl', ['$scope','serviceAjax','labels','$routeParams','$uibModal',
         function($scope,serviceAjax,labels,$routeParams,$uibModal) {
             $scope.label = labels;
             $scope.id = $routeParams.id;
-            serviceAjax.detailRecette($scope.id).success(function (data) {
-                $scope.recette = data;
+            serviceAjax.detailRecette($scope.id).then(function (response) {
+                $scope.recette = response.data;
             });
 
             $scope.showModalModify=function () {

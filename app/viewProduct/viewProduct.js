@@ -3,11 +3,11 @@
  */
 'use strict';
 
-angular.module('myApp.view6', ['ngRoute'])
+angular.module('myApp.viewProduct', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/stock/:id', {
-            templateUrl: 'view6/view6.html',
+            templateUrl: 'viewProduct/viewProduct.html',
             controller: 'View6Ctrl'
         });
     }])
@@ -17,11 +17,11 @@ angular.module('myApp.view6', ['ngRoute'])
             $scope.label = labels;
             $scope.id = $routeParams.id;
             $scope.data={};
-            serviceAjax.detailProduct($scope.id).success(function (data) {
-                $scope.item = data;
+            serviceAjax.detailProduct($scope.id).then(function (response) {
+                $scope.item = response.data;
                 $scope.data.products = [{product: $scope.item.product.name}];
-                serviceAjax.findRecette($scope.data).success(function(retour) {
-                    $scope.recipe = retour;
+                serviceAjax.findRecette($scope.data).then(function(response) {
+                    $scope.recipe = response.data;
                     console.log($scope.recipe)
                 });
             });

@@ -1,25 +1,203 @@
-/* app css stylesheet */
+@CHARSET "ISO-8859-1";
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/*
+    Created on : 1 juin 2015, 22:27:30
+    Author     : gaga
+*/
+body
+{
+  background-color: #CCCCCC;
+}
+header h1
+{
+  font-size: x-large;
+  font-family: Verdana,sherif;
+  text-align: center;
+}
+nav
+{
+  display: inline-block;
+  background-color: #2222AA;
+  text-align: right;
+  width:100%;
+  min-width: 650px;
+  border: 3px black groove;
 
-.menu {
-  list-style: none;
-  border-bottom: 0.1em solid black;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+}
+nav ul
+{
+  list-style-type: none;
 }
 
-.menu:before {
-  content: "[";
+nav li
+{
+  display: inline-block;
+  border: 1px black groove;
+  box-shadow: 6px 6px 0px black;
+  min-width: 50px;
+  padding: 10px;
+  margin-right: 15px;
+}
+nav a
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+  color: black;
+  padding-bottom: 2px;
+}
+nav a:hover
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+  color: black;
+
+}
+nav a:visited /* Quand le visiteur a déjà vu la page concernée */
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+  color: black;
+}
+section
+{
+  width: 50%;
+  min-width: 400px;
+}
+section h1
+{
+  font-size: large;
+  font-family: Verdana,sherif;
+  text-align: left;
+}
+article
+{
+  font-size:medium;
+  font-family: "Times New Roman",sherif;
+  text-align: justify;
+  border: 3px #2222AA double;
+  border-radius:10px;
+  box-shadow: 6px 6px 0px black;
+  word-wrap: break-word;
+  padding: 12px;
+  margin: 50px
+}
+action h1
+{
+  font-size: large;
+  font-family: Verdana,sherif;
+  text-align: left;
+}
+article a
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+  color: blue;
+}
+article a:hover
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: underline;
+  font-style: normal;
+  font-weight: normal;
+  color: green;
+
+}
+article a:visited /* Quand le visiteur a déjà vu la page concernée */
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: italic;
+  font-weight: bold;
+  color: blue;
+}
+article em
+{
+  color:black;
+  font-size:medium;
+  font-family: "Times New Roman",sherif;
+  font-style: normal;
+  font-weight: bold;
+}
+.introduction
+{
+  color: grey;
+  font-size:medium;
+  font-family: "Times New Roman",sherif;
+  text-align: center;
+
+}
+.description
+{
+  color: black;
+  font-size:medium;
+  font-family: "Times New Roman",sherif;
+}
+footer h1
+{
+  font-size: 1.1em;
+  font-family: "Times New Roman",sherif;
+  text-align: left;
+}
+footer a
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: normal;
+  font-weight: bold;
+  color: black;
+}
+footer a:hover
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: underline;
+  font-style: italic;
+  font-weight: bold;
+  color: black;
+
+}
+footer a:visited /* Quand le visiteur a déjà vu la page concernée */
+{
+  font-family: "Times New Roman",sherif;
+  text-decoration: none;
+  font-style: italic;
+  font-weight: bold;
+  color: black;
+}
+footer
+{
+  text-align: justify;
+}
+footer ul
+{
+  list-style-type: none;
 }
 
-.menu:after {
-  content: "]";
+footer li
+{
+  display: inline-block;
+  min-width: 50px;
+  padding: 10px;
+  margin-right: 15px;
 }
 
-.menu > li {
-  display: inline;
-}
-
-.menu > li + li:before {
-  content: "|";
-  padding-right: 0.3em;
+.popup
+{
+  z-index: 2;
+  margin-top:         4px;
+  padding:            3px;
+  border:             0px;
+  width:              200px;
+  border: 1px solid red;
 }

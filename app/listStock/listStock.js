@@ -3,11 +3,11 @@
  */
 'use strict';
 
-angular.module('myApp.view4', ['ngRoute'])
+angular.module('myApp.listStock', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/view4', {
-            templateUrl: 'view4/view4.html',
+        $routeProvider.when('/listStock', {
+            templateUrl: 'listStock/listStock.html',
             controller: 'View4Ctrl'
         });
     }])
@@ -16,11 +16,11 @@ angular.module('myApp.view4', ['ngRoute'])
         $scope.label = labels;
         $scope.category = {};
         $scope.stock = {};
-        serviceAjax.categoryDispo().success(function(data) {
-                $scope.category = data
+        serviceAjax.categoryDispo().then(function(response) {
+                $scope.category = response.data
             });
-        serviceAjax.stockGestion().success(function(data) {
-            $scope.stock = data
+        serviceAjax.stockGestion().then(function(response) {
+            $scope.stock = response.data
         });
 
     }]);

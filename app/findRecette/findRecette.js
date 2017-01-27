@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.view3', ['ngRoute'])
+angular.module('myApp.findRecette', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/view3', {
-            templateUrl: 'view3/view3.html',
+        $routeProvider.when('/findRecette', {
+            templateUrl: 'findRecette/findRecette.html',
             controller: 'View3Ctrl'
         });
     }])
@@ -19,12 +19,12 @@ angular.module('myApp.view3', ['ngRoute'])
         $scope.addIngredient = function(){
             $scope.nbIngredient.push({id:$scope.nbIngredient.length+1, product:''});
         };
-        serviceAjax.typePlatDispo().success(function(data) {
-            $scope.availableTypes = data;
+        serviceAjax.typePlatDispo().then(function(response) {
+            $scope.availableTypes = response.data;
             $scope.availableTypes.push({name:'ALL'})
         });
-        serviceAjax.saisonDispo().success(function(data) {
-            $scope.availableSaison = data;
+        serviceAjax.saisonDispo().then(function(response) {
+            $scope.availableSaison = response.data;
             $scope.availableSaison.push({name:'ALL'})
             $scope.availableSaison.push({name:'DE_SAISON'})
         });
@@ -37,9 +37,9 @@ angular.module('myApp.view3', ['ngRoute'])
             $scope.data={};
             $scope.data.products = $scope.nbIngredient;
             console.log($scope.data);
-            serviceAjax.findRecette($scope.data).success(function(retour) {
-                $scope.recipe = retour;
-                $scope.filterRecipe= retour;
+            serviceAjax.findRecette($scope.data).then(function(response) {
+                $scope.recipe = response.data;
+                $scope.filterRecipe= response.data;
                 $scope.data = {};
                 $scope.nbIngredient = [{id:1, product:''}];
 

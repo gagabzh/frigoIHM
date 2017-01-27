@@ -1,16 +1,19 @@
-<div>
-
-    <div ng-repeat="recette in recipe">
+<div style="display: flex">
+<section>
+    <article ng-repeat="recette in recipe">
         <h2>
-            {{recette.id}} -
-            <a ng-href="#!/recipe/{{recette.id}}">{{recette.name}}</a>
+            <a ng-click="show(recette.id)">{{recette.name}}</a>
             ({{label.platsLabel[recette.typePlat.name]}})
         </h2>
         {{recette.description}}
         <div ng-repeat = "ingre in recette.ingredient">
             - {{ingre.quantity.value}} {{label.unitesLabel[ingre.quantity.unit.name]}} de {{ingre.product.name}}
         </div>
-    </div>
+    </article>
 
+</section>
+
+<aside>
+    <view-recipe recipeToShow=showRecipe>></view-recipe>
+</aside>
 </div>
-

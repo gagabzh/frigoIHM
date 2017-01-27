@@ -8,25 +8,25 @@ angular.module('myApp.productModal', [])
         $scope.availableCategory={};
         $scope.availableDuration={};
         $scope.error= false;
-        serviceAjax.costDispo().success(function(data) {
-            $scope.availableCost = data
+        serviceAjax.costDispo().then(function(response) {
+            $scope.availableCost = response.data
         });
-        serviceAjax.categoryDispo().success(function(data) {
-            $scope.availableCategory = data
+        serviceAjax.categoryDispo().then(function(response) {
+            $scope.availableCategory = response.data
         });
-        serviceAjax.durationDispo().success(function(data) {
-            $scope.availableDuration = data
+        serviceAjax.durationDispo().then(function(response) {
+            $scope.availableDuration = response.data
         });
-        serviceAjax.unitDispo().success(function(data) {
-            $scope.availableUnits = data;
+        serviceAjax.unitDispo().then(function(response) {
+            $scope.availableUnits = response.data;
         });
-        $scope.product = {name:""};
+        $scope.product = {name:null};
         $scope.product.name = items;
         $scope.save =function(){
 
             serviceAjax.postProduit($scope.product)
-                .success(function(response) {
-                    $scope.response = response.reussite==='ok';
+                .then(function(response) {
+                    $scope.response = response.status===200;
                     if ($scope.response){
                         $scope.error= false;
                         $scope.$close($scope.product);
