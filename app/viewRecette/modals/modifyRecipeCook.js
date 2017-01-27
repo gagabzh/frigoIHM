@@ -8,12 +8,12 @@ angular.module('myApp.modifyRecipeCook', [])
         function ($scope,serviceAjax,recette,labels) {
             $scope.label = labels;
             $scope.recipe = recette;
-            serviceAjax.typePlatDispo().success(function(data) {
-                $scope.availableTypes = data;
+            serviceAjax.typePlatDispo().then(function(response) {
+                $scope.availableTypes = response.data;
             });
             $scope.getMenu =function(){
-                serviceAjax.findMenu($scope.menu.previsionalDate).success(function(data) {
-                    $scope.menu = data;
+                serviceAjax.findMenu($scope.menu.previsionalDate).then(function(response) {
+                    $scope.menu = response.data;
                 });
             };
             $scope.save =function(){

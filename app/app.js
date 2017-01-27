@@ -4,12 +4,12 @@
 angular.module('myApp', [
     'ngRoute',
     'ui.bootstrap',
-    'myApp.view1',
-    'myApp.view2',
-    'myApp.view3',
-    'myApp.view4',
-    'myApp.view5',
-    'myApp.view6',
+    'myApp.listRecette',
+    'myApp.createRecette',
+    'myApp.findRecette',
+    'myApp.listStock',
+    'myApp.viewRecette',
+    'myApp.viewProduct',
     'myApp.version',
     'myApp.productModal',
     'myApp.modifyRecipeModal',
@@ -18,7 +18,7 @@ angular.module('myApp', [
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
-    //$routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.otherwise({redirectTo: '/listRecette'});
 }]).
 factory('labels', function labels() {
     return{
@@ -78,7 +78,45 @@ factory('labels', function labels() {
 factory('serviceAjax', function serviceAjax($http) {
     return{
         findMenu: function(data) {
-            return $http.post("http://localhost:8080/menus/find",data);
+            //return $http.post("http://localhost:8080/menus/find",data);
+            return [
+                {
+                data:{
+                    id:1,
+                    previsionalDate:'3/01/2017',
+                    repas:
+                    [
+                        {
+                            id: 1,
+                            typeRepas: BREAKFAST,
+                            recipe: [
+                                {id: 1},
+                                {id: 2}
+                            ],
+                            ingredients: [
+                                {}
+                            ]
+                        },
+            {
+                id:2,
+                    typeRepas:BREAKFAST,
+                recipe:
+                [
+                    {}
+            ],
+                ingredient:
+                    [
+                        {id: 1},
+                        {id: 2}
+                    ]
+            },
+                    ]
+
+
+            },
+                    status:200
+            }
+            ]
         },
         getMenus: function() {
             return $http.get("http://localhost:8080/menus/index");
@@ -142,8 +180,8 @@ directive('ngAutocomplete', function() {
             canAdd: "=canAdd",
         },
         controller: ['$scope', 'serviceAjax','$uibModal', function($scope,serviceAjax,$uibModal){
-            serviceAjax.produitDispo().success(function(data) {
-                $scope.availableProducts = data
+            serviceAjax.produitDispo().then(function(response) {
+                $scope.availableProducts = response.data
             });
             $scope.twoWayBind.product="";
             $scope.search='';
@@ -172,8 +210,8 @@ directive('ngAutocomplete', function() {
                         }
                     }
                 }).result.then(function(product){
-                    serviceAjax.produitDispo().success(function(data) {
-                        $scope.availableProducts = data
+                    serviceAjax.produitDispo().then(function(response) {
+                        $scope.availableProducts = response.data
                     });
                     $scope.search=product;
 

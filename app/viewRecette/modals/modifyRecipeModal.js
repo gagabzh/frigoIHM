@@ -11,11 +11,11 @@ angular.module('myApp.modifyRecipeModal', [])
             console.log($scope.recipe);
             $scope.nbIngredient = recette.ingredient;
 
-            serviceAjax.unitDispo().success(function(data) {
-                $scope.availableUnits = data;
+            serviceAjax.unitDispo().then(function(response) {
+                $scope.availableUnits = response.data;
             });
-            serviceAjax.typePlatDispo().success(function(data) {
-                $scope.availableTypes = data;
+            serviceAjax.typePlatDispo().then(function(response) {
+                $scope.availableTypes = response.data;
             });
 
             $scope.newIngredient = [];
@@ -31,7 +31,7 @@ angular.module('myApp.modifyRecipeModal', [])
                 var data = {};
                 data.recipe = $scope.recipe;
                 data.recipe.ingredient = $scope.nbIngredient;
-                serviceAjax.putRecette($scope.recipe.id,data).success(function(response) {
+                serviceAjax.putRecette($scope.recipe.id,data).then(function(response) {
                     $scope.$close();
 
                 });

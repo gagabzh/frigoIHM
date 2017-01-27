@@ -1,5 +1,7 @@
+<section>
+    <article>
 <h2>Creation d'une recette</h2>
-<form novalidate class="simple-form">
+<form novalidate class="simple-form" style="display: block">
         <label>Nom: <input type="text" ng-model="recipe.name" /></label><br />
         <label>Description: <textarea cols="40" rows="2" ng-model="recipe.description"></textarea></label><br />
         <label>Nombre de personne: <input type="number" ng-model="recipe.personNumber" /></label><br />
@@ -7,10 +9,10 @@
         <option ng-repeat="option in availableTypes" value="{{option.name}}">{{label.platsLabel[option.name]}}</option>
     </select></label><br />
         Ingrédients :
-        <div flex>
-            <div ng-repeat="nb in nbIngredient">
+        <div style="display: inline">
+            <div ng-repeat="nb in nbIngredient" >
                 <label>Ingrédients {{nb.id}} :
-                    <input type="number" ng-model="nb.quantity.value">
+                    <input type="number" ng-model="nb.quantity.value" styel="width: 50px">
                     <select ng-model="nb.quantity.unit">
                         <option ng-repeat="option in availableUnits" value="{{option.name}}">{{label.unitesLabel[option.name]}}</option>
                     </select>
@@ -23,6 +25,10 @@
         <label>Instruction: <textarea name="Text1" ng-model="recipe.instructions" cols="40" rows="5"></textarea></label><br />
         <input type="submit" ng-click="update(recipe)" value="Save" />
     </form>
-<div ng-if="response">
-    Sauvegarde réussie
-</div>
+    </article>
+
+    <article ng-if="response">
+        Sauvegarde réussie
+    </article>
+
+</section>
