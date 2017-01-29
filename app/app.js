@@ -14,7 +14,8 @@ angular.module('myApp', [
     'myApp.productModal',
     'myApp.modifyRecipeModal',
     'myApp.modifyRecipeCook',
-    'myApp.modifyRecipePlan'
+    'myApp.modifyRecipePlan',
+    'myApp.calendar'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -72,51 +73,20 @@ factory('labels', function labels() {
             10:'Octobre',
             11:'Novembre',
             12:'Decembre'
-                    }
+        },
+        repasType:{
+            BREAKFAST :'Petit déjeuner',
+            LUNCH: 'Déjeuner',
+            DINER: 'Diner',
+            SNACK: 'Grignotage'
+        }
+
     };
 }).
 factory('serviceAjax', function serviceAjax($http) {
     return{
         findMenu: function(data) {
-            //return $http.post("http://localhost:8080/menus/find",data);
-            return [
-                {
-                data:{
-                    id:1,
-                    previsionalDate:'3/01/2017',
-                    repas:
-                    [
-                        {
-                            id: 1,
-                            typeRepas: BREAKFAST,
-                            recipe: [
-                                {id: 1},
-                                {id: 2}
-                            ],
-                            ingredients: [
-                                {}
-                            ]
-                        },
-            {
-                id:2,
-                    typeRepas:BREAKFAST,
-                recipe:
-                [
-                    {}
-            ],
-                ingredient:
-                    [
-                        {id: 1},
-                        {id: 2}
-                    ]
-            },
-                    ]
-
-
-            },
-                    status:200
-            }
-            ]
+            return $http.get("http://localhost:8080/menus/find", data);
         },
         getMenus: function() {
             return $http.get("http://localhost:8080/menus/index");

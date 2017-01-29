@@ -1,0 +1,24 @@
+
+    <h3 id="Planning">
+       UI Calendar
+        <div class="clearfix"></div>
+    </h3>
+    <div ui-calendar="uiConfig.calendar"  class="span8 calendar" ng-model="eventSources"></div>
+
+    <div ng-controller="calendar">
+        <table>
+            <tr>
+                <td>Titre</td>
+                <td>Date</td>
+                <td>Type de Repas</td>
+                <td ng-click="addEvent()">Add event</td>
+
+            </tr>
+            <tr ng-repeat="event in events">
+                <td>{{event.title}}</td>
+                <td>{{event.start}}</td>
+                <td>{{event.typeRepas.name}}</td>
+                <td ng-click="remove($index)">Remove</td>
+            </tr>
+        </table>
+</div>
