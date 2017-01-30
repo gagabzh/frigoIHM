@@ -17,39 +17,37 @@ angular.module('myApp.calendar', [
     }])
     .controller('calendar', ['$scope','serviceAjax','labels',  function ($scope,serviceAjax,labels) {
         var date = new Date();
-        var d = date.getDate();
+        // var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        serviceAjax.getMenus().then(function(response) {
-            var menus = response.data;
-            for (var i=0; i<menus.length; i++){
-                menus[i].title = labels.repasType[menus[i].typeRepas.name];
-                menus[i].start = menus[i].previsionalDate;
-                $scope.events.push(menus[i]);
-            }
-            console.log(menus);
-        });
+        $scope.labels = labels;
+        $scope.onLoad = function(){
+            $scope.events.slice(1);
+            serviceAjax.getMenus().then(function(response) {
+                var menus = response.data;
+                $scope.menus = response.data;
+                for (var i=0; i<menus.length; i++){
+                    menus[i].title = labels.repasType[menus[i].typeRepas.name];
+                    menus[i].start = menus[i].previsionalDate;
+                    $scope.events.push(menus[i]);
+                }
+                $scope.$broadcast('menuCharged')
+            });
+        };
         /* event source that contains custom events on the scope */
-
         $scope.events = [];
-/*            [
-            {title: 'All Day Event',start: new Date(y, m, 1)},
-            {title: 'Long Event',start: new Date(y, m, d - 5),end: new Date(y, m, d - 2)},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d - 3, 16, 0),allDay: false},
-            {id: 999,title: 'Repeating Event',start: new Date(y, m, d + 4, 16, 0),allDay: false},
-            {title: 'Birthday Party',start: new Date(y, m, d + 1, 19, 0),end: new Date(y, m, d + 1, 22, 30),allDay: false},
-            {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ];*/
+
         /* alert on eventClick */
-        $scope.alertOnEventClick = function( date, jsEvent, view){
+        $scope.alertOnEventClick = function( date){
             console.log(date.typeRepas.name + ' was clicked ');
         };
         /* alert on Drop */
-        $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
+        $scope.alertOnDrop = function(event, delta){
             console.log('Event Droped to make dayDelta ' + delta);
+            $scope.menus = $scope.events
         };
         /* alert on Resize */
-        $scope.alertOnResize = function(event, delta, revertFunc, jsEvent, ui, view ){
+        $scope.alertOnResize = function(event, delta){
             console.log('Event Resized to make dayDelta ' + delta);
         };
         /* add and removes an event source of choice */
@@ -73,10 +71,12 @@ angular.module('myApp.calendar', [
                 end: new Date(y, m, 29),
                 className: ['openSesame']
             });
+
         };
         /* remove event */
         $scope.remove = function(index) {
             $scope.events.splice(index,1);
+
         };
         /* Change View */
         $scope.changeView = function(view,calendar) {
@@ -89,7 +89,7 @@ angular.module('myApp.calendar', [
             }
         };
         /* Render Tooltip */
-        $scope.eventRender = function( event, element, view ) {
+        $scope.eventRender = function( event, element ) {
             element.attr({'tooltip': event.title,
                 'tooltip-append-to-body': true});
         };
@@ -109,6 +109,8 @@ angular.module('myApp.calendar', [
                 eventRender: $scope.eventRender,
                 viewRender: function(view) {
                     console.log("View Changed: ", view.start.format(), view.end.format());
+                    $scope.onLoad();
+
                 },
                 dayClick: function(date) {
                     console.log('Clicked on: ' + date.format());
