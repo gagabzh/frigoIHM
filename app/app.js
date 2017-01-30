@@ -91,6 +91,9 @@ factory('serviceAjax', function serviceAjax($http) {
         getMenus: function() {
             return $http.get("http://localhost:8080/menus/index");
         },
+        postMenu: function(data) {
+            return $http.post("http://localhost:8080/menus/deepSave",data);
+        },
         postRecette: function(data) {
             return $http.post("http://localhost:8080/recipes/deepSave",data);
         },
@@ -121,6 +124,9 @@ factory('serviceAjax', function serviceAjax($http) {
         },
         typePlatDispo: function(){
             return $http.get("http://localhost:8080/recipes/witchType")
+        },
+        typeRepasDispo: function(){
+            return $http.get("http://localhost:8080/menus/witchType")
         },
         saisonDispo: function(){
             return $http.get("http://localhost:8080/products/witchSeason")

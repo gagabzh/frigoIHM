@@ -18,40 +18,38 @@ angular.module('myApp.viewRecette', [
         restrict: "EA",
         templateUrl: 'viewRecette/viewRecette.html',
         scope: {
-            twoWayBind: "=myTwoWayBind",
-            recipeToShow: "=recipeToShow"
         },
-        controller: ['$scope','serviceAjax','labels',
-                function($scope,serviceAjax,labels) {
-                    console.log($scope.recipeToShow);
-                    $scope.label = labels;
-                    if ($scope.recipeToShow !== undefined) {
-                        serviceAjax.detailRecette($scope.recipeToShow).then(function (response) {
-                            $scope.recette = response.data;
-                        });
-                    }else{
-                        serviceAjax.detailRecette(1).then(function (response) {
-                            $scope.recette = response.data;
-                        });
-                    }
-                }
-        ]
+        controller: 'View5Ctrl',
 
     }
     })
-    .controller('View5Ctrl', ['$scope','serviceAjax','labels','$routeParams','$uibModal',
-        function($scope,serviceAjax,labels,$routeParams,$uibModal) {
+    .controller('View5Ctrl', ['$scope','$rootScope','serviceAjax','labels','$routeParams','$uibModal',
+        function($scope,$rootScope,serviceAjax,labels,$routeParams,$uibModal) {
             $scope.label = labels;
-            $scope.id = $routeParams.id;
-            serviceAjax.detailRecette($scope.id).then(function (response) {
-                $scope.recette = response.data;
-            });
 
+            $scope.id = $routeParams.id;
+
+
+            if ($scope.id !== undefined) {
+                serviceAjax.detailRecette($scope.id).then(function (response) {
+                    $scope.recette = response.data;
+                });
+            }else{
+                serviceAjax.detailRecette(1).then(function (response) {
+                    $scope.recette = response.data;
+                });
+            }
+
+            $scope.$on('RecipeChange', function(event){
+                serviceAjax.detailRecette($rootScope.showRecipe).then(function (response) {
+                    $scope.recette = response.data;
+                });
+            });
             $scope.showModalModify=function () {
                 $scope.show = false;
                 $uibModal.open({
                     animation: true,
-                    templateUrl: 'view5/modals/modifyRecipeModal.html',
+                    templateUrl: 'viewRecette/modals/modifyRecipeModal.html',
                     controller: 'modifyRecipeModalCtrl',
                     resolve: {
                         recette: function () {
@@ -67,7 +65,7 @@ angular.module('myApp.viewRecette', [
                 $scope.show = false;
                 $uibModal.open({
                     animation: true,
-                    templateUrl: 'view5/modals/modifyRecipePlan.html',
+                    templateUrl: 'viewRecette/modals/modifyRecipePlan.html',
                     controller: 'modifyRecipePlanCtrl',
                     resolve: {
                         recette: function () {
@@ -83,7 +81,7 @@ angular.module('myApp.viewRecette', [
                 $scope.show = false;
                 $uibModal.open({
                     animation: true,
-                    templateUrl: 'view5/modals/modifyRecipeCook.html',
+                    templateUrl: 'viewRecette/modals/modifyRecipeCook.html',
                     controller: 'modifyRecipeCookCtrl',
                     resolve: {
                         recette: function () {

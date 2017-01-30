@@ -20,5 +20,9 @@
     "bootstrap-css-only": "^3.3.7",
     "angular-ui-calendar": "latest",
     "angular-bootstrap-calendar": "latest"
+  },
+  "resolutions": {
+    "angular": "1.6.1",
+    "moment": "^2.17.1"
   }
 }

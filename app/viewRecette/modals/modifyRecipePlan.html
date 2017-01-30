@@ -1,11 +1,12 @@
 
     <form>
-        <label>Date: <input type="date" ng-model="menu.previsionalDate" ng-change="getMenu()"/></label><br />
-        <label>Type de plat :
-            <select ng-options="label.platsLabel[option.name] for option in availableTypes track by option.name"
-                    ng-model="menu.typePlat"></select>
+        <label>Date: <input type="date" ng-model="menu.previsionalDate"/></label><br />
+        <label>Type de repas :
+            <select ng-options="label.repasType[option.name] for option in availableMeal track by option.name"
+                    ng-model="menu.typeRepas"></select>
 
         </label><br />
+        <label>Nombre de personnes : <input type="number" ng-model="menu.repas.nbPerson "/></label><br />
         <br/>
         <input type="submit" ng-click="save()" value="Save" />
         <input type="submit" ng-click="close()" value="Cancel" />

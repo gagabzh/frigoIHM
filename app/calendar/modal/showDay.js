@@ -8,15 +8,17 @@ angular.module('myApp.showDay', [])
         function ($scope,serviceAjax,labels) {
             $scope.label = labels;
 
-
+            serviceAjax.typeRepasDispo().then(function(response) {
+                $scope.availableMeal = response.data;
+            });
             serviceAjax.typePlatDispo().then(function(response) {
                 $scope.availableTypes = response.data;
             });
-            $scope.getMenu =function(){
+/*            $scope.getMenu =function(){
                 serviceAjax.findMenu($scope.menu.previsionalDate).then(function(response) {
                     $scope.menu = response.data;
                 });
-            };
+            }*/;
             $scope.save =function(){
                 $scope.$close();
             };

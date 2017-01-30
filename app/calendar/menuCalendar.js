@@ -24,7 +24,7 @@ angular.module('myApp.calendar', [
             var menus = response.data;
             for (var i=0; i<menus.length; i++){
                 menus[i].title = labels.repasType[menus[i].typeRepas.name];
-                menus[i].start = menus[i].previsionalDate
+                menus[i].start = menus[i].previsionalDate;
                 $scope.events.push(menus[i]);
             }
             console.log(menus);

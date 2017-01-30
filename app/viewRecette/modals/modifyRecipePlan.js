@@ -8,22 +8,30 @@ angular.module('myApp.modifyRecipePlan', [])
         function ($scope,serviceAjax,recette,labels) {
             $scope.label = labels;
             $scope.recipe = recette;
+            $scope.menu = {};
+            $scope.menu.repas = {};
+            $scope.menu.repas.nbPerson = 1;
+            $scope.menu.repas.recipe = [$scope.recipe];
+            $scope.menu.previsionalDate = new Date();
+
+
+            serviceAjax.typeRepasDispo().then(function(response) {
+                $scope.availableMeal = response.data;
+            });
             serviceAjax.typePlatDispo().then(function(response) {
                 $scope.availableTypes = response.data;
             });
-            serviceAjax.getMenus().then(function(response) {
-                $scope.existingMenu = response.data;
-                console.log($scope.existingMenu);
-            });
-
-            $scope.getMenu =function(){
-                console.log($scope.menu);
-                serviceAjax.findMenu($scope.menu).then(function(response) {
-                    $scope.menu = response.data;
-                });
-            };
             $scope.save =function(){
-                $scope.$close();
+                console.log($scope.menu);
+                serviceAjax.postMenu($scope.menu).then(function(response) {
+                    $scope.statu = response.status===200;
+                    if ($scope.statu){
+                        $scope.menu = {};
+                        $scope.$close();
+                    }
+                });
+
+
             };
             $scope.close =function(){
                 $scope.$close();

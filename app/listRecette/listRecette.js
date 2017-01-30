@@ -8,7 +8,7 @@ angular.module('myApp.listRecette', ['ngRoute'])
         });
     }])
 
-    .controller('View1Ctrl', ['$scope','serviceAjax','labels', function($scope,serviceAjax,labels) {
+    .controller('View1Ctrl', ['$scope','$rootScope','serviceAjax','labels', function($scope,$rootScope,serviceAjax,labels) {
         $scope.recipe = {};
         $scope.showRecipe = 1;
         $scope.label = labels;
@@ -16,8 +16,8 @@ angular.module('myApp.listRecette', ['ngRoute'])
             $scope.recipe = response.data;
         });
         $scope.show=function (id) {
-            console.log(id)
-            $scope.showRecipe = id;
+            $rootScope.showRecipe = id;
+            $rootScope.$broadcast('RecipeChange')
         }
 
     }]);
